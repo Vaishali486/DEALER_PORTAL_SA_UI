@@ -1,0 +1,384 @@
+<edmx:Edmx xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" Version="4.0">
+<edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Common.xml">
+<edmx:Include Namespace="com.sap.vocabularies.Common.v1" Alias="Common"/>
+</edmx:Reference>
+<edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/UI.xml">
+<edmx:Include Namespace="com.sap.vocabularies.UI.v1" Alias="UI"/>
+</edmx:Reference>
+<edmx:Reference Uri="/odata/v4/ideal-sa-application/$metadata">
+<edmx:Include Namespace="ideal_sa_application"/>
+</edmx:Reference>
+<edmx:DataServices>
+<Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="local">
+<Annotations Target="ideal_sa_application.applicationMaster">
+<Annotation Term="Common.SideEffects" Qualifier="EntitySideEffect">
+<Record>
+<PropertyValue Property="SourceEntities">
+<Collection>
+<NavigationPropertyPath>TO_SA_APPLICATION</NavigationPropertyPath>
+</Collection>
+</PropertyValue>
+<PropertyValue Property="TargetEntities">
+<Collection>
+<NavigationPropertyPath>TO_SA_APPLICATION</NavigationPropertyPath>
+</Collection>
+</PropertyValue>
+</Record>
+</Annotation>
+<Annotation Term="UI.FieldGroup" Qualifier="GeneratedGroup">
+<Record Type="UI.FieldGroupType">
+<PropertyValue Property="Data">
+<Collection>
+<Record Type="UI.DataField">
+<PropertyValue Property="Label" String="Sequence"/>
+<PropertyValue Property="Value" Path="SR_NO"/>
+</Record>
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="USER_ROLE"/>
+</Record>
+<Record Type="UI.DataField">
+<PropertyValue Property="Label" String="Application"/>
+<PropertyValue Property="Value" Path="APPLICATION_NAME"/>
+</Record>
+<Record Type="UI.DataField">
+<PropertyValue Property="Label" String="Application type"/>
+<PropertyValue Property="Value" Path="APPLICATION_TYPE"/>
+</Record>
+<Record Type="UI.DataField">
+<PropertyValue Property="Label" String="Application Icon URL"/>
+<PropertyValue Property="Value" Path="APPLICATION_ICON_URL"/>
+</Record>
+</Collection>
+</PropertyValue>
+</Record>
+</Annotation>
+<Annotation Term="UI.Facets">
+<Collection>
+<Record Type="UI.ReferenceFacet">
+<PropertyValue Property="ID" String="GeneratedFacet1"/>
+<PropertyValue Property="Label" String="Master iDeal Header"/>
+<PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#GeneratedGroup"/>
+</Record>
+<Record Type="UI.ReferenceFacet">
+<PropertyValue Property="Label" String="Master iDeal Application"/>
+<PropertyValue Property="ID" String="MasteriDealApplication"/>
+<PropertyValue Property="Target" AnnotationPath="TO_SA_APPLICATION/@UI.LineItem#MasteriDealApplication"/>
+</Record>
+</Collection>
+</Annotation>
+<Annotation Term="UI.LineItem">
+<Collection>
+<Record Type="UI.DataField">
+<PropertyValue Property="Label" String="Sequence"/>
+<PropertyValue Property="Value" Path="SR_NO"/>
+<Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+</Record>
+<Record Type="UI.DataField">
+<PropertyValue Property="Label" String="Application Icon"/>
+<PropertyValue Property="Value" Path="APPLICATION_ICON"/>
+<Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+</Record>
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="APPLICATION_NAME"/>
+<PropertyValue Property="Label" String="Application"/>
+<Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+</Record>
+<Record Type="UI.DataField">
+<PropertyValue Property="Label" String="Application Role"/>
+<PropertyValue Property="Value" Path="USER_ROLE"/>
+<Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+</Record>
+<Record Type="UI.DataField">
+<PropertyValue Property="Label" String="Application Type"/>
+<PropertyValue Property="Value" Path="APPLICATION_TYPE"/>
+<Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+</Record>
+</Collection>
+</Annotation>
+<Annotation Term="UI.SelectionFields">
+<Collection>
+<PropertyPath>USER_ROLE</PropertyPath>
+<PropertyPath>APPLICATION_TYPE</PropertyPath>
+</Collection>
+</Annotation>
+<Annotation Term="UI.SelectionPresentationVariant" Qualifier="tableView">
+<Record Type="UI.SelectionPresentationVariantType">
+<PropertyValue Property="PresentationVariant">
+<Record Type="UI.PresentationVariantType">
+<PropertyValue Property="Visualizations">
+<Collection>
+<AnnotationPath>@UI.LineItem</AnnotationPath>
+</Collection>
+</PropertyValue>
+</Record>
+</PropertyValue>
+<PropertyValue Property="SelectionVariant">
+<Record Type="UI.SelectionVariantType">
+<PropertyValue Property="SelectOptions">
+<Collection/>
+</PropertyValue>
+</Record>
+</PropertyValue>
+<PropertyValue Property="Text" String="iDeal Application Information"/>
+</Record>
+</Annotation>
+<Annotation Term="UI.HeaderInfo">
+<Record>
+<PropertyValue Property="Title">
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="APPLICATION_NAME"/>
+</Record>
+</PropertyValue>
+<PropertyValue Property="TypeName" String=""/>
+<PropertyValue Property="TypeNamePlural" String=""/>
+<PropertyValue Property="ImageUrl" Path="APPLICATION_ICON_URL"/>
+</Record>
+</Annotation>
+</Annotations>
+<Annotations Target="ideal_sa_application.applicationMaster/APPLICATION_TYPE">
+<Annotation Term="Common.Label" String="Application Type"/>
+<Annotation Term="Common.ValueList">
+<Record Type="Common.ValueListType">
+<PropertyValue Property="CollectionPath" String="masterApplicationType"/>
+<PropertyValue Property="Parameters">
+<Collection>
+<Record Type="Common.ValueListParameterInOut">
+<PropertyValue Property="LocalDataProperty" PropertyPath="APPLICATION_TYPE"/>
+<PropertyValue Property="ValueListProperty" String="APPLICATION_TYPE"/>
+</Record>
+<Record Type="Common.ValueListParameterDisplayOnly">
+<PropertyValue Property="ValueListProperty" String="APPLICATION_TYPE_DESC"/>
+</Record>
+</Collection>
+</PropertyValue>
+<PropertyValue Property="Label" String="Application Type"/>
+</Record>
+</Annotation>
+<Annotation Term="Common.ValueListWithFixedValues" Bool="true"/>
+<Annotation Term="Common.Text" Path="TO_APPLICATION_TYPE/APPLICATION_TYPE_DESC">
+<Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly"/>
+</Annotation>
+</Annotations>
+<Annotations Target="ideal_sa_application.applicationMaster/USER_ROLE">
+<Annotation Term="Common.Label" String="Application Role"/>
+<Annotation Term="Common.ValueList">
+<Record Type="Common.ValueListType">
+<PropertyValue Property="CollectionPath" String="masterRoleCollection"/>
+<PropertyValue Property="Parameters">
+<Collection>
+<Record Type="Common.ValueListParameterInOut">
+<PropertyValue Property="LocalDataProperty" PropertyPath="USER_ROLE"/>
+<PropertyValue Property="ValueListProperty" String="USER_ROLE"/>
+</Record>
+</Collection>
+</PropertyValue>
+<PropertyValue Property="Label" String="Application Role"/>
+</Record>
+</Annotation>
+<Annotation Term="Common.ValueListWithFixedValues" Bool="true"/>
+</Annotations>
+<Annotations Target="ideal_sa_application.resourceApplicationMaster">
+<Annotation Term="UI.LineItem" Qualifier="tableView">
+<Collection>
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="FILE_CONTENT"/>
+<PropertyValue Property="Label" String="Logo"/>
+<Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+</Record>
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="RESOURCE_NAME"/>
+<PropertyValue Property="Label" String="Application Name"/>
+<Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+</Record>
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="RESOURCE_TYPE"/>
+<PropertyValue Property="Label" String="Application Type"/>
+<Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+</Record>
+</Collection>
+</Annotation>
+<Annotation Term="UI.SelectionPresentationVariant" Qualifier="tableView">
+<Record Type="UI.SelectionPresentationVariantType">
+<PropertyValue Property="PresentationVariant">
+<Record Type="UI.PresentationVariantType">
+<PropertyValue Property="Visualizations">
+<Collection>
+<AnnotationPath>@UI.LineItem#tableView</AnnotationPath>
+</Collection>
+</PropertyValue>
+</Record>
+</PropertyValue>
+<PropertyValue Property="SelectionVariant">
+<Record Type="UI.SelectionVariantType">
+<PropertyValue Property="SelectOptions">
+<Collection/>
+</PropertyValue>
+</Record>
+</PropertyValue>
+<PropertyValue Property="Text" String="iDeal Header Information"/>
+</Record>
+</Annotation>
+<Annotation Term="UI.Facets">
+<Collection>
+<Record Type="UI.ReferenceFacet">
+<PropertyValue Property="Label" String="Master iDeal SA Application"/>
+<PropertyValue Property="ID" String="MasteriDealSAApplication"/>
+<PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#MasteriDealSAApplication"/>
+</Record>
+</Collection>
+</Annotation>
+<Annotation Term="UI.FieldGroup" Qualifier="MasteriDealSAApplication">
+<Record Type="UI.FieldGroupType">
+<PropertyValue Property="Data">
+<Collection>
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="RESOURCE_NAME"/>
+<PropertyValue Property="Label" String="Application Name"/>
+</Record>
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="RESOURCE_TYPE"/>
+<PropertyValue Property="Label" String="Application Type"/>
+</Record>
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="FILE_CONTENT"/>
+<PropertyValue Property="Label" String="Logo"/>
+</Record>
+</Collection>
+</PropertyValue>
+</Record>
+</Annotation>
+<Annotation Term="UI.FieldGroup" Qualifier="Header">
+<Record Type="UI.FieldGroupType">
+<PropertyValue Property="Data">
+<Collection/>
+</PropertyValue>
+</Record>
+</Annotation>
+<Annotation Term="UI.HeaderInfo">
+<Record>
+<PropertyValue Property="Title">
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="RESOURCE_NAME"/>
+</Record>
+</PropertyValue>
+<PropertyValue Property="TypeName" String=""/>
+<PropertyValue Property="TypeNamePlural" String=""/>
+<PropertyValue Property="ImageUrl" String=""/>
+</Record>
+</Annotation>
+</Annotations>
+<Annotations Target="ideal_sa_application.masterRoleCollection/USER_ROLE">
+<Annotation Term="Common.Text" Path="USER_ROLE_DESCRIPTION"/>
+</Annotations>
+<Annotations Target="ideal_sa_application.masterApplicationType/APPLICATION_TYPE">
+<Annotation Term="Common.Text" Path="APPLICATION_TYPE_DESC">
+<Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly"/>
+</Annotation>
+</Annotations>
+
+
+
+<Annotations Target="ideal_sa_application.applicationMaster">
+    <Annotation Term="Common.SideEffects" Qualifier="MasterApplicationSideEffects">
+        <Record>
+            <PropertyValue Property="SourceProperties">
+                <Collection>
+                    <PropertyPath>TO_SA_APPLICATION/SA_APPLICATION_ICON_URL</PropertyPath>
+                </Collection>
+            </PropertyValue>
+            <PropertyValue Property="TargetProperties">
+                <Collection>
+                    <String>TO_SA_APPLICATION/SA_APPLICATION_ICON</String>
+                </Collection>
+            </PropertyValue>
+        </Record>
+    </Annotation>
+</Annotations>
+<!--  
+<Annotation Term="Common.SideEffects" Qualifier="SAApplication">
+    <Record>
+        <PropertyValue Property="SourceProperties">
+            <Collection>
+                <PropertyPath>SA_APPLICATION_ICON_URL</PropertyPath>
+            </Collection>
+        </PropertyValue>
+        <PropertyValue Property="TargetProperties">
+            <Collection>
+                <String>SA_APPLICATION_ICON</String>
+            </Collection>
+        </PropertyValue>   
+    </Record>
+    </Annotation>  -->
+<Annotations Target="ideal_sa_application.saApplicationMaster">
+<Annotation Term="UI.LineItem" Qualifier="MasteriDealApplication">
+<Collection>
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="SA_APPLICATION_ICON"/>
+<PropertyValue Property="Label" String="Application Icon"/>
+<Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+</Record>
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="SA_APPLICATION_NAME"/>
+<PropertyValue Property="Label" String="Application"/>
+<Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+</Record>
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="SA_APPLICATION_ICON_URL"/>
+<PropertyValue Property="Label" String="Application Icon URL"/>
+<Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+</Record>
+<Record Type="UI.DataField">
+<PropertyValue Property="Value" Path="SA_APPLICATION_LINK"/>
+<PropertyValue Property="Label" String="Application Link"/>
+<Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+</Record>
+</Collection>
+</Annotation>
+</Annotations>
+<Annotations Target="ideal_sa_application.masterResource/RESOURCE_TYPE">
+<Annotation Term="Common.Text" Path="RESOURCE_TYPE_DESC">
+<Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly"/>
+</Annotation>
+</Annotations>
+<Annotations Target="ideal_sa_application.resourceApplicationMaster/RESOURCE_TYPE">
+<Annotation Term="Common.ValueList">
+<Record Type="Common.ValueListType">
+<PropertyValue Property="CollectionPath" String="masterResource"/>
+<PropertyValue Property="Parameters">
+<Collection>
+<Record Type="Common.ValueListParameterInOut">
+<PropertyValue Property="LocalDataProperty" PropertyPath="RESOURCE_TYPE"/>
+<PropertyValue Property="ValueListProperty" String="RESOURCE_TYPE"/>
+</Record>
+<Record Type="Common.ValueListParameterDisplayOnly">
+<PropertyValue Property="ValueListProperty" String="RESOURCE_TYPE_DESC"/>
+</Record>
+</Collection>
+</PropertyValue>
+<PropertyValue Property="Label" String="Application Type"/>
+</Record>
+</Annotation>
+<Annotation Term="Common.ValueListWithFixedValues" Bool="true"/>
+<Annotation Term="Common.Text" Path="TO_RESOURCE_TYPE/RESOURCE_TYPE_DESC">
+<Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly"/>
+</Annotation>
+</Annotations>
+<!--  <Annotations Target="ideal_sa_application.saApplicationMaster">
+    <Annotation Term="Common.SideEffects" Qualifier="SAApplication">
+    <Record>
+        <PropertyValue Property="SourceProperties">
+            <Collection>
+                <PropertyPath>SA_APPLICATION_ICON_URL</PropertyPath>
+            </Collection>
+        </PropertyValue>
+        <PropertyValue Property="TargetProperties">
+            <Collection>
+                <String>SA_APPLICATION_ICON</String>
+            </Collection>
+        </PropertyValue>   
+    </Record>
+    </Annotation>
+</Annotations>  -->
+</Schema>
+</edmx:DataServices>
+</edmx:Edmx>

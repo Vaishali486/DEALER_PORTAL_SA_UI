@@ -1,0 +1,366 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Common.xml">
+        <edmx:Include Alias="Common" Namespace="com.sap.vocabularies.Common.v1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml">
+        <edmx:Include Alias="Core" Namespace="Org.OData.Core.V1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/UI.xml">
+        <edmx:Include Alias="UI" Namespace="com.sap.vocabularies.UI.v1"/>
+    </edmx:Reference>
+    <edmx:DataServices>
+        <Schema Namespace="ideal_sa_application" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <Annotation Term="Core.Links">
+                <Collection>
+                    <Record>
+                        <PropertyValue Property="rel" String="author"/>
+                        <PropertyValue Property="href" String="https://cap.cloud.sap"/>
+                    </Record>
+                </Collection>
+            </Annotation>
+            <EntityContainer Name="EntityContainer">
+                <EntitySet Name="resourceApplicationMaster" EntityType="ideal_sa_application.resourceApplicationMaster">
+                    <NavigationPropertyBinding Path="TO_RESOURCE_TYPE" Target="masterResource"/>
+                    <NavigationPropertyBinding Path="SiblingEntity" Target="resourceApplicationMaster"/>
+                </EntitySet>
+                <EntitySet Name="applicationMaster" EntityType="ideal_sa_application.applicationMaster">
+                    <NavigationPropertyBinding Path="TO_APPLICATION_TYPE" Target="masterApplicationType"/>
+                    <NavigationPropertyBinding Path="TO_SA_APPLICATION" Target="saApplicationMaster"/>
+                    <NavigationPropertyBinding Path="SiblingEntity" Target="applicationMaster"/>
+                </EntitySet>
+                <EntitySet Name="saApplicationMaster" EntityType="ideal_sa_application.saApplicationMaster">
+                    <NavigationPropertyBinding Path="TO_APPLICATION" Target="applicationMaster"/>
+                    <NavigationPropertyBinding Path="SiblingEntity" Target="saApplicationMaster"/>
+                </EntitySet>
+                <EntitySet Name="masterRoleCollection" EntityType="ideal_sa_application.masterRoleCollection"/>
+                <EntitySet Name="masterResource" EntityType="ideal_sa_application.masterResource"/>
+                <EntitySet Name="masterApplicationType" EntityType="ideal_sa_application.masterApplicationType"/>
+                <FunctionImport Name="getAccessApps" Function="ideal_sa_application.getAccessApps"/>
+            </EntityContainer>
+            <EntityType Name="resourceApplicationMaster">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                    <PropertyRef Name="IsActiveEntity"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="SEQUENCE" Type="Edm.Int64"/>
+                <Property Name="RESOURCE_NAME" Type="Edm.String" MaxLength="100"/>
+                <Property Name="RESOURCE_TYPE" Type="Edm.String" MaxLength="10"/>
+                <Property Name="LOGO" Type="Edm.String" MaxLength="200"/>
+                <Property Name="FILE_CONTENT" Type="Edm.Stream"/>
+                <Property Name="FILE_NAME" Type="Edm.String" MaxLength="200"/>
+                <Property Name="FILE_MIMETYPE" Type="Edm.String" MaxLength="200"/>
+                <NavigationProperty Name="TO_RESOURCE_TYPE" Type="ideal_sa_application.masterResource">
+                    <ReferentialConstraint Property="RESOURCE_TYPE" ReferencedProperty="RESOURCE_TYPE"/>
+                </NavigationProperty>
+                <Property Name="IsActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="true"/>
+                <Property Name="HasActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false"/>
+                <Property Name="HasDraftEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false"/>
+                <NavigationProperty Name="DraftAdministrativeData" Type="ideal_sa_application.DraftAdministrativeData" ContainsTarget="true"/>
+                <NavigationProperty Name="SiblingEntity" Type="ideal_sa_application.resourceApplicationMaster"/>
+            </EntityType>
+            <EntityType Name="applicationMaster">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                    <PropertyRef Name="IsActiveEntity"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="SR_NO" Type="Edm.Int64"/>
+                <Property Name="APPLICATION_ICON" Type="Edm.String" MaxLength="100"/>
+                <Property Name="APPLICATION_ICON_URL" Type="Edm.String" MaxLength="100"/>
+                <Property Name="APPLICATION_TYPE" Type="Edm.String" MaxLength="10"/>
+                <Property Name="APPLICATION_NAME" Type="Edm.String" MaxLength="200"/>
+                <Property Name="USER_ROLE" Type="Edm.String" MaxLength="100"/>
+                <NavigationProperty Name="TO_APPLICATION_TYPE" Type="ideal_sa_application.masterApplicationType">
+                    <ReferentialConstraint Property="APPLICATION_TYPE" ReferencedProperty="APPLICATION_TYPE"/>
+                </NavigationProperty>
+                <NavigationProperty Name="TO_SA_APPLICATION" Type="Collection(ideal_sa_application.saApplicationMaster)" Partner="TO_APPLICATION">
+                    <OnDelete Action="Cascade"/>
+                </NavigationProperty>
+                <Property Name="IsActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="true"/>
+                <Property Name="HasActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false"/>
+                <Property Name="HasDraftEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false"/>
+                <NavigationProperty Name="DraftAdministrativeData" Type="ideal_sa_application.DraftAdministrativeData" ContainsTarget="true"/>
+                <NavigationProperty Name="SiblingEntity" Type="ideal_sa_application.applicationMaster"/>
+            </EntityType>
+            <EntityType Name="saApplicationMaster">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                    <PropertyRef Name="IsActiveEntity"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="SA_APPLICATION_ICON" Type="Edm.String" MaxLength="100"/>
+                <Property Name="SA_APPLICATION_ICON_URL" Type="Edm.String" MaxLength="100"/>
+                <Property Name="SA_APPLICATION_LINK" Type="Edm.String" MaxLength="500"/>
+                <Property Name="SA_APPLICATION_NAME" Type="Edm.String" MaxLength="200"/>
+                <NavigationProperty Name="TO_APPLICATION" Type="ideal_sa_application.applicationMaster" Partner="TO_SA_APPLICATION">
+                    <ReferentialConstraint Property="TO_APPLICATION_ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="TO_APPLICATION_ID" Type="Edm.Guid"/>
+                <Property Name="IsActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="true"/>
+                <Property Name="HasActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false"/>
+                <Property Name="HasDraftEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false"/>
+                <NavigationProperty Name="DraftAdministrativeData" Type="ideal_sa_application.DraftAdministrativeData" ContainsTarget="true"/>
+                <NavigationProperty Name="SiblingEntity" Type="ideal_sa_application.saApplicationMaster"/>
+            </EntityType>
+            <EntityType Name="masterRoleCollection">
+                <Key>
+                    <PropertyRef Name="USER_ROLE"/>
+                </Key>
+                <Property Name="USER_ROLE" Type="Edm.String" MaxLength="100" Nullable="false"/>
+                <Property Name="USER_ROLE_DESCRIPTION" Type="Edm.String" MaxLength="200"/>
+                <Property Name="ISREADONLY" Type="Edm.Boolean"/>
+            </EntityType>
+            <EntityType Name="masterResource">
+                <Key>
+                    <PropertyRef Name="RESOURCE_TYPE"/>
+                </Key>
+                <Property Name="RESOURCE_TYPE" Type="Edm.String" MaxLength="10" Nullable="false"/>
+                <Property Name="RESOURCE_TYPE_DESC" Type="Edm.String" MaxLength="50"/>
+            </EntityType>
+            <EntityType Name="masterApplicationType">
+                <Key>
+                    <PropertyRef Name="APPLICATION_TYPE"/>
+                </Key>
+                <Property Name="APPLICATION_TYPE" Type="Edm.String" MaxLength="10" Nullable="false"/>
+                <Property Name="APPLICATION_TYPE_DESC" Type="Edm.String" MaxLength="50"/>
+            </EntityType>
+            <EntityType Name="DraftAdministrativeData">
+                <Key>
+                    <PropertyRef Name="DraftUUID"/>
+                </Key>
+                <Property Name="DraftUUID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="CreationDateTime" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="CreatedByUser" Type="Edm.String" MaxLength="256"/>
+                <Property Name="DraftIsCreatedByMe" Type="Edm.Boolean"/>
+                <Property Name="LastChangeDateTime" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="LastChangedByUser" Type="Edm.String" MaxLength="256"/>
+                <Property Name="InProcessByUser" Type="Edm.String" MaxLength="256"/>
+                <Property Name="DraftIsProcessedByMe" Type="Edm.Boolean"/>
+            </EntityType>
+            <Action Name="draftPrepare" IsBound="true" EntitySetPath="in">
+                <Parameter Name="in" Type="ideal_sa_application.resourceApplicationMaster"/>
+                <Parameter Name="SideEffectsQualifier" Type="Edm.String"/>
+                <ReturnType Type="ideal_sa_application.resourceApplicationMaster"/>
+            </Action>
+            <Action Name="draftPrepare" IsBound="true" EntitySetPath="in">
+                <Parameter Name="in" Type="ideal_sa_application.applicationMaster"/>
+                <Parameter Name="SideEffectsQualifier" Type="Edm.String"/>
+                <ReturnType Type="ideal_sa_application.applicationMaster"/>
+            </Action>
+            <Action Name="draftPrepare" IsBound="true" EntitySetPath="in">
+                <Parameter Name="in" Type="ideal_sa_application.saApplicationMaster"/>
+                <Parameter Name="SideEffectsQualifier" Type="Edm.String"/>
+                <ReturnType Type="ideal_sa_application.saApplicationMaster"/>
+            </Action>
+            <Action Name="draftActivate" IsBound="true" EntitySetPath="in">
+                <Parameter Name="in" Type="ideal_sa_application.resourceApplicationMaster"/>
+                <ReturnType Type="ideal_sa_application.resourceApplicationMaster"/>
+            </Action>
+            <Action Name="draftActivate" IsBound="true" EntitySetPath="in">
+                <Parameter Name="in" Type="ideal_sa_application.applicationMaster"/>
+                <ReturnType Type="ideal_sa_application.applicationMaster"/>
+            </Action>
+            <Action Name="draftEdit" IsBound="true" EntitySetPath="in">
+                <Parameter Name="in" Type="ideal_sa_application.resourceApplicationMaster"/>
+                <Parameter Name="PreserveChanges" Type="Edm.Boolean"/>
+                <ReturnType Type="ideal_sa_application.resourceApplicationMaster"/>
+            </Action>
+            <Action Name="draftEdit" IsBound="true" EntitySetPath="in">
+                <Parameter Name="in" Type="ideal_sa_application.applicationMaster"/>
+                <Parameter Name="PreserveChanges" Type="Edm.Boolean"/>
+                <ReturnType Type="ideal_sa_application.applicationMaster"/>
+            </Action>
+            <Function Name="getAccessApps" IsBound="false" IsComposable="false">
+                <ReturnType Type="Collection(Edm.String)" Nullable="true"/>
+            </Function>
+            <Annotations Target="ideal_sa_application.EntityContainer/resourceApplicationMaster">
+                <Annotation Term="Common.DraftRoot">
+                    <Record Type="Common.DraftRootType">
+                        <PropertyValue Property="ActivationAction" String="ideal_sa_application.draftActivate"/>
+                        <PropertyValue Property="EditAction" String="ideal_sa_application.draftEdit"/>
+                        <PropertyValue Property="PreparationAction" String="ideal_sa_application.draftPrepare"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="ideal_sa_application.resourceApplicationMaster/ID">
+                <Annotation Term="Core.ComputedDefaultValue" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_sa_application.resourceApplicationMaster/SEQUENCE">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_sa_application.resourceApplicationMaster/LOGO">
+                <Annotation Term="UI.IsImageURL" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_sa_application.resourceApplicationMaster/FILE_CONTENT">
+                <Annotation Term="Core.MediaType" Path="FILE_MIMETYPE"/>
+                <Annotation Term="Core.ContentDisposition">
+                    <Record Type="Core.ContentDispositionType">
+                        <PropertyValue Property="Filename" Path="FILE_NAME"/>
+                        <PropertyValue Property="Type" String="inline"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="ideal_sa_application.resourceApplicationMaster/FILE_MIMETYPE">
+                <Annotation Term="Core.IsMediaType" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_sa_application.resourceApplicationMaster/IsActiveEntity">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_sa_application.resourceApplicationMaster/HasActiveEntity">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_sa_application.resourceApplicationMaster/HasDraftEntity">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_sa_application.resourceApplicationMaster/DraftAdministrativeData">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_sa_application.applicationMaster">
+                <Annotation Term="Common.SideEffects" Qualifier="ChangeApplicationIcon">
+                    <Record Type="Common.SideEffectsType">
+                        <PropertyValue Property="SourceProperties">
+                            <Collection>
+                                <PropertyPath>APPLICATION_ICON_URL</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="TargetProperties">
+                            <Collection>
+                                <Path>APPLICATION_ICON</Path>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Common.SideEffects" Qualifier="ChangeSAApplicationIcon">
+                    <Record Type="Common.SideEffectsType">
+                        <PropertyValue Property="SourceEntities">
+                            <Collection>
+                                <NavigationPropertyPath>TO_SA_APPLICATION</NavigationPropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="TargetEntities">
+                            <Collection>
+                                <NavigationPropertyPath>TO_SA_APPLICATION</NavigationPropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="ideal_sa_application.EntityContainer/applicationMaster">
+                <Annotation Term="Common.SideEffects" Qualifier="ChangeApplicationIcon">
+                    <Record Type="Common.SideEffectsType">
+                        <PropertyValue Property="SourceProperties">
+                            <Collection>
+                                <PropertyPath>APPLICATION_ICON_URL</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="TargetProperties">
+                            <Collection>
+                                <Path>APPLICATION_ICON</Path>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Common.SideEffects" Qualifier="ChangeSAApplicationIcon">
+                    <Record Type="Common.SideEffectsType">
+                        <PropertyValue Property="SourceEntities">
+                            <Collection>
+                                <NavigationPropertyPath>TO_SA_APPLICATION</NavigationPropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="TargetEntities">
+                            <Collection>
+                                <NavigationPropertyPath>TO_SA_APPLICATION</NavigationPropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Common.DraftRoot">
+                    <Record Type="Common.DraftRootType">
+                        <PropertyValue Property="ActivationAction" String="ideal_sa_application.draftActivate"/>
+                        <PropertyValue Property="EditAction" String="ideal_sa_application.draftEdit"/>
+                        <PropertyValue Property="PreparationAction" String="ideal_sa_application.draftPrepare"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="ideal_sa_application.applicationMaster/ID">
+                <Annotation Term="Core.ComputedDefaultValue" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_sa_application.applicationMaster/SR_NO">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_sa_application.applicationMaster/APPLICATION_ICON">
+                <Annotation Term="UI.IsImageURL" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_sa_application.applicationMaster/IsActiveEntity">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_sa_application.applicationMaster/HasActiveEntity">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_sa_application.applicationMaster/HasDraftEntity">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_sa_application.applicationMaster/DraftAdministrativeData">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_sa_application.EntityContainer/saApplicationMaster">
+                <Annotation Term="Common.DraftNode">
+                    <Record Type="Common.DraftNodeType">
+                        <PropertyValue Property="PreparationAction" String="ideal_sa_application.draftPrepare"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="ideal_sa_application.saApplicationMaster/ID">
+                <Annotation Term="Core.ComputedDefaultValue" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_sa_application.saApplicationMaster/SA_APPLICATION_ICON">
+                <Annotation Term="UI.IsImageURL" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_sa_application.saApplicationMaster/IsActiveEntity">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_sa_application.saApplicationMaster/HasActiveEntity">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_sa_application.saApplicationMaster/HasDraftEntity">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_sa_application.saApplicationMaster/DraftAdministrativeData">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_sa_application.DraftAdministrativeData">
+                <Annotation Term="Common.Label" String="Draft Administrative Data"/>
+            </Annotations>
+            <Annotations Target="ideal_sa_application.DraftAdministrativeData/DraftUUID">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+                <Annotation Term="Common.Label" String="Draft (Technical ID)"/>
+                <Annotation Term="Core.ComputedDefaultValue" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_sa_application.DraftAdministrativeData/CreationDateTime">
+                <Annotation Term="Common.Label" String="Draft Created On"/>
+            </Annotations>
+            <Annotations Target="ideal_sa_application.DraftAdministrativeData/CreatedByUser">
+                <Annotation Term="Common.Label" String="Draft Created By"/>
+            </Annotations>
+            <Annotations Target="ideal_sa_application.DraftAdministrativeData/DraftIsCreatedByMe">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+                <Annotation Term="Common.Label" String="Draft Created By Me"/>
+            </Annotations>
+            <Annotations Target="ideal_sa_application.DraftAdministrativeData/LastChangeDateTime">
+                <Annotation Term="Common.Label" String="Draft Last Changed On"/>
+            </Annotations>
+            <Annotations Target="ideal_sa_application.DraftAdministrativeData/LastChangedByUser">
+                <Annotation Term="Common.Label" String="Draft Last Changed By"/>
+            </Annotations>
+            <Annotations Target="ideal_sa_application.DraftAdministrativeData/InProcessByUser">
+                <Annotation Term="Common.Label" String="Draft In Process By"/>
+            </Annotations>
+            <Annotations Target="ideal_sa_application.DraftAdministrativeData/DraftIsProcessedByMe">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+                <Annotation Term="Common.Label" String="Draft In Process By Me"/>
+            </Annotations>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

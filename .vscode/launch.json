@@ -1,0 +1,165 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Start ibs_mta_ideal_toolpage",
+      "type": "node",
+      "request": "launch",
+      "cwd": "${workspaceFolder}/ibs_mta_ideal_toolpage",
+      "runtimeExecutable": "npx",
+      "windows": {
+        "runtimeExecutable": "npx.cmd"
+      },
+      "runtimeArgs": [
+        "fiori",
+        "run"
+      ],
+      "args": [
+        "--open",
+        "test/flpSandbox.html#comibsibsmtaidealtoolpage-display"
+      ],
+      "console": "internalConsole",
+      "internalConsoleOptions": "openOnSessionStart",
+      "outputCapture": "std",
+      "env": {
+        "DEBUG": "--inspect",
+        "FIORI_TOOLS_URL_PARAMS": "sap-ui-xx-viewCache=false",
+        "run.config": "{\"handlerId\":\"fiori_tools\",\"runnableId\":\"/home/user/projects/ibs_mta_ideal_toolpage/ibs_mta_ideal_toolpage\"}"
+      }
+    },
+    {
+      "name": "Start ibs_mta_ideal_toolpage Mock",
+      "type": "node",
+      "request": "launch",
+      "cwd": "${workspaceFolder}/ibs_mta_ideal_toolpage",
+      "runtimeExecutable": "npx",
+      "windows": {
+        "runtimeExecutable": "npx.cmd"
+      },
+      "runtimeArgs": [
+        "fiori",
+        "run"
+      ],
+      "args": [
+        "--config",
+        "./ui5-mock.yaml",
+        "--open",
+        "test/flpSandbox.html#comibsibsmtaidealtoolpage-display"
+      ],
+      "console": "internalConsole",
+      "internalConsoleOptions": "openOnSessionStart",
+      "outputCapture": "std",
+      "env": {
+        "FIORI_TOOLS_URL_PARAMS": "sap-ui-xx-viewCache=false",
+        "run.config": "{\"handlerId\":\"fiori_tools\",\"runnableId\":\"/home/user/projects/ibs_mta_ideal_toolpage/ibs_mta_ideal_toolpage\"}"
+      }
+    },
+    {
+      "name": "Start ibs_mta_ideal_toolpage Local",
+      "type": "node",
+      "request": "launch",
+      "cwd": "${workspaceFolder}/ibs_mta_ideal_toolpage",
+      "runtimeExecutable": "npx",
+      "windows": {
+        "runtimeExecutable": "npx.cmd"
+      },
+      "runtimeArgs": [
+        "fiori",
+        "run"
+      ],
+      "args": [
+        "--config",
+        "./ui5-local.yaml",
+        "--open",
+        "test/flpSandbox.html#comibsibsmtaidealtoolpage-display"
+      ],
+      "console": "internalConsole",
+      "internalConsoleOptions": "openOnSessionStart",
+      "outputCapture": "std",
+      "env": {
+        "FIORI_TOOLS_URL_PARAMS": "sap-ui-xx-viewCache=false",
+        "run.config": "{\"handlerId\":\"fiori_tools\",\"runnableId\":\"/home/user/projects/ibs_mta_ideal_toolpage/ibs_mta_ideal_toolpage\"}"
+      }
+    },
+    {
+      "name": "Start ibs_ideal_toolpage",
+      "type": "node",
+      "request": "launch",
+      "cwd": "${workspaceFolder}/ibs_ideal_toolpage",
+      "runtimeExecutable": "npx",
+      "windows": {
+        "runtimeExecutable": "npx.cmd"
+      },
+      "runtimeArgs": [
+        "fiori",
+        "run"
+      ],
+      "args": [
+        "--open",
+        "test/flpSandbox.html#comibsibsidealtoolpage-display"
+      ],
+      "console": "internalConsole",
+      "internalConsoleOptions": "openOnSessionStart",
+      "outputCapture": "std",
+      "env": {
+        "DEBUG": "--inspect",
+        "FIORI_TOOLS_URL_PARAMS": "sap-ui-xx-viewCache=false",
+        "run.config": "{\"handlerId\":\"fiori_tools\",\"runnableId\":\"/home/user/projects/ibs_mta_ideal_toolpage/ibs_ideal_toolpage\"}"
+      }
+    },
+    {
+      "name": "Start ibs_ideal_toolpage Local",
+      "type": "node",
+      "request": "launch",
+      "cwd": "${workspaceFolder}/ibs_ideal_toolpage",
+      "runtimeExecutable": "npx",
+      "windows": {
+        "runtimeExecutable": "npx.cmd"
+      },
+      "runtimeArgs": [
+        "fiori",
+        "run"
+      ],
+      "args": [
+        "--config",
+        "./ui5-local.yaml",
+        "--open",
+        "test/flpSandbox.html#comibsibsidealtoolpage-display"
+      ],
+      "console": "internalConsole",
+      "internalConsoleOptions": "openOnSessionStart",
+      "outputCapture": "std",
+      "env": {
+        "FIORI_TOOLS_URL_PARAMS": "sap-ui-xx-viewCache=false",
+        "run.config": "{\"handlerId\":\"fiori_tools\",\"runnableId\":\"/home/user/projects/ibs_mta_ideal_toolpage/ibs_ideal_toolpage\"}"
+      }
+    },
+    {
+      "name": "Start ibs_ideal_toolpage Mock",
+      "type": "node",
+      "request": "launch",
+      "cwd": "${workspaceFolder}/ibs_ideal_toolpage",
+      "runtimeExecutable": "npx",
+      "windows": {
+        "runtimeExecutable": "npx.cmd"
+      },
+      "runtimeArgs": [
+        "fiori",
+        "run"
+      ],
+      "args": [
+        "--config",
+        "./ui5-mock.yaml",
+        "--open",
+        "test/flpSandbox.html#comibsibsidealtoolpage-display"
+      ],
+      "console": "internalConsole",
+      "internalConsoleOptions": "openOnSessionStart",
+      "outputCapture": "std",
+      "env": {
+        "FIORI_TOOLS_URL_PARAMS": "sap-ui-xx-viewCache=false",
+        "run.config": "{\"handlerId\":\"fiori_tools\",\"runnableId\":\"/home/user/projects/ibs_mta_ideal_toolpage/ibs_ideal_toolpage\"}"
+      }
+    }
+  ]
+}

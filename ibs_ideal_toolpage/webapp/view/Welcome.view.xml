@@ -1,0 +1,16 @@
+<mvc:View xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="com.ibs.ibsidealtoolpage.controller.Welcome" displayBlock="true">
+<!--  <App >  -->
+<Page id="welcomePage" title="{resourcemodel>/0/RESOURCE_NAME}">
+<Title id="carouselTitle" class="sapUiSmallMarginTop"/>
+<!--  <HBox justifyContent="Center" renderType="Bare">  -->
+<!--  <Panel id="carouselContainer" height="500px" backgroundDesign="Solid">  -->
+<Carousel backgroundDesign="Solid" id="carouselSample" ariaLabelledBy="carouselTitle" loop="true">
+<customLayout>
+<CarouselLayout/>
+</customLayout>
+</Carousel>
+<!--  </Panel>  -->
+<!--  </HBox>  -->
+</Page>
+<!--  </App>  -->
+</mvc:View>

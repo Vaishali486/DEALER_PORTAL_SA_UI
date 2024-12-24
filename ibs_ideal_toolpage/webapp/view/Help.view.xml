@@ -1,0 +1,15 @@
+<mvc:View xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="com.ibs.ibsidealtoolpage.controller.Help" displayBlock="true">
+<App id="help">
+<!--  <ScrollContainer
+		height="100%"
+		width="100%"
+		horizontal="false"
+		vertical="false">  -->
+<PDFViewer source="{helpmodel>/0/LOGO}" isTrustedSource="true" title="{helpmodel>/0/RESOURCE_NAME}" height="800px">
+<layoutData>
+<FlexItemData growFactor="1"/>
+</layoutData>
+</PDFViewer>
+<!--  </ScrollContainer>  -->
+</App>
+</mvc:View>
