@@ -126,6 +126,13 @@
             "target": [
                 "TargetHelp"
             ]
+        },
+        {
+            "name": "RouteMainContent",
+            "pattern": "toolpage/mainApplication",
+            "target": [
+                "TargetMainContent"
+            ]
         }
       ],
       "targets": {
@@ -140,6 +147,10 @@
         "TargetHelp": {
             "id": "Help",
             "name": "Help"
+        },
+        "TargetMainContent": {
+            "id": "mainContent",
+            "name": "mainContent"
         }
       }
     },

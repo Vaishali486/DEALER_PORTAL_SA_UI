@@ -217,65 +217,7 @@
             <Annotations Target="ideal_sa_application.resourceApplicationMaster/DraftAdministrativeData">
                 <Annotation Term="UI.Hidden" Bool="true"/>
             </Annotations>
-            <Annotations Target="ideal_sa_application.applicationMaster">
-                <Annotation Term="Common.SideEffects" Qualifier="ChangeApplicationIcon">
-                    <Record Type="Common.SideEffectsType">
-                        <PropertyValue Property="SourceProperties">
-                            <Collection>
-                                <PropertyPath>APPLICATION_ICON_URL</PropertyPath>
-                            </Collection>
-                        </PropertyValue>
-                        <PropertyValue Property="TargetProperties">
-                            <Collection>
-                                <Path>APPLICATION_ICON</Path>
-                            </Collection>
-                        </PropertyValue>
-                    </Record>
-                </Annotation>
-                <Annotation Term="Common.SideEffects" Qualifier="ChangeSAApplicationIcon">
-                    <Record Type="Common.SideEffectsType">
-                        <PropertyValue Property="SourceEntities">
-                            <Collection>
-                                <NavigationPropertyPath>TO_SA_APPLICATION</NavigationPropertyPath>
-                            </Collection>
-                        </PropertyValue>
-                        <PropertyValue Property="TargetEntities">
-                            <Collection>
-                                <NavigationPropertyPath>TO_SA_APPLICATION</NavigationPropertyPath>
-                            </Collection>
-                        </PropertyValue>
-                    </Record>
-                </Annotation>
-            </Annotations>
             <Annotations Target="ideal_sa_application.EntityContainer/applicationMaster">
-                <Annotation Term="Common.SideEffects" Qualifier="ChangeApplicationIcon">
-                    <Record Type="Common.SideEffectsType">
-                        <PropertyValue Property="SourceProperties">
-                            <Collection>
-                                <PropertyPath>APPLICATION_ICON_URL</PropertyPath>
-                            </Collection>
-                        </PropertyValue>
-                        <PropertyValue Property="TargetProperties">
-                            <Collection>
-                                <Path>APPLICATION_ICON</Path>
-                            </Collection>
-                        </PropertyValue>
-                    </Record>
-                </Annotation>
-                <Annotation Term="Common.SideEffects" Qualifier="ChangeSAApplicationIcon">
-                    <Record Type="Common.SideEffectsType">
-                        <PropertyValue Property="SourceEntities">
-                            <Collection>
-                                <NavigationPropertyPath>TO_SA_APPLICATION</NavigationPropertyPath>
-                            </Collection>
-                        </PropertyValue>
-                        <PropertyValue Property="TargetEntities">
-                            <Collection>
-                                <NavigationPropertyPath>TO_SA_APPLICATION</NavigationPropertyPath>
-                            </Collection>
-                        </PropertyValue>
-                    </Record>
-                </Annotation>
                 <Annotation Term="Common.DraftRoot">
                     <Record Type="Common.DraftRootType">
                         <PropertyValue Property="ActivationAction" String="ideal_sa_application.draftActivate"/>

@@ -277,7 +277,7 @@
 </Annotations>
 
 
-
+<!-- 
 <Annotations Target="ideal_sa_application.applicationMaster">
     <Annotation Term="Common.SideEffects" Qualifier="MasterApplicationSideEffects">
         <Record>
@@ -293,7 +293,7 @@
             </PropertyValue>
         </Record>
     </Annotation>
-</Annotations>
+</Annotations> -->
 <!--  
 <Annotation Term="Common.SideEffects" Qualifier="SAApplication">
     <Record>

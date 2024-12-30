@@ -40,7 +40,7 @@
                     press="onHelpPress"
                 />
                 <Avatar
-                    initials="VC"
+                    initials="{userModel>/initials}"
                     displaySize="XS"
                     press="onClickAvatar"
                 />
@@ -50,7 +50,7 @@
             <tnt:SideNavigation
                 expanded="true"
                 selectedKey="{/selectedKey}"
-                itemSelect=".onItemSelect"
+                itemSelect="onItemSelect"
             >
                 <tnt:NavigationList items="{path: 'accessAppModel>/'}">
                     <tnt:NavigationListItem

@@ -22,13 +22,14 @@
             singleContainerFullSize="false">
             <f:content>
                 <Label text="First Name" />
-                <Text
-                    id="nameText"
-                    text="{userModel>/FirstName}"/>
+                <Text text="{userModel>/firstname}"/>
                 <Label text="Last Name" />
-                <Text text="Street HouseNumber" />
-                <Label text="Email" />
-                <Text text="ZIPCode City" />
+                <Text
+                    text="{userModel>/lastname}"/>
+                <Label text="E-Mail" />
+                <Text
+                    text="{userModel>/email}"/>
+                
                 <!--  <Label text="Country" />
 				<Text id="countryText" text="{Country}" />  -->
             </f:content>
