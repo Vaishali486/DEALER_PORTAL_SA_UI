@@ -133,6 +133,13 @@
             "target": [
                 "TargetMainContent"
             ]
+        },
+        {
+            "name": "RouteAppContent",
+            "pattern": "toolpage/Application",
+            "target": [
+                "TargetAppContent"
+            ]
         }
       ],
       "targets": {
@@ -151,6 +158,10 @@
         "TargetMainContent": {
             "id": "mainContent",
             "name": "mainContent"
+        },
+        "TargetAppContent": {
+            "id": "appContent",
+            "name": "appContent"
         }
       }
     },

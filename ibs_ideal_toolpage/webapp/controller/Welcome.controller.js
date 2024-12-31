@@ -21,9 +21,9 @@ sap.ui.define([
             this.onWelcomePage();
 
         },
-        onObjectMatched:function(){
+        // onObjectMatched:function(){
            
-        },
+        // },
         onWelcomePage: function(){
          
             var oList =  this.getOwnerComponent().getModel().bindList("/resourceApplicationMaster",undefined,

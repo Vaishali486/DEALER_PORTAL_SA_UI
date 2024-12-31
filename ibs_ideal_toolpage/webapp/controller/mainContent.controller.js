@@ -7,7 +7,7 @@ sap.ui.define([
     "sap/ui/model/Sorter"
   ], (BaseController,JSONModel,Filter,FilterOperator,Image,Sorter) => {
     "use strict";
-    var that;
+    var that,oAppDataModel;
     return BaseController.extend("com.ibs.ibsidealtoolpage.controller.mainContent", {
         onInit: function() {
           that = this;
@@ -19,30 +19,36 @@ sap.ui.define([
           this.onManageSite();
         },
         onManageSite:function(){
-          var oList =  this.getOwnerComponent().getModel().bindList("/applicationMaster",undefined,[],
-              [new Filter("APPLICATION_TYPE", FilterOperator.EQ, "PLG")],
-              {   $expand: "TO_SA_APPLICATION" 
-              });
-              oList.requestContexts().then((odata) => {
-                  var pluginApp = [];
-                  odata.forEach(element => {
-                  pluginApp.push(element.getObject());
-              });
-              var oModel = new JSONModel(pluginApp);
-              this.getView().setModel(oModel,"pluginAppModel");
-              this._getManageSiteiFrame(pluginApp);
-
-          });
+          oAppDataModel = this.getOwnerComponent().getModel();
+          var ContextBinding = oAppDataModel.bindContext("/getAccessApps(...)"); // BooksByGenre is the function 							      Import to get custom data
+            // ContextBinding.setParameter("genre", 'MYS') //  genre is the paramater we are passing to 					 backend which is set in backend which works like filter
+            ContextBinding.execute().then(
+                function () {
+                    var oData = ContextBinding.getBoundContext().getObject().value;
+                    var pluginApp =[];
+                    for(let i=0 ; i< oData.length; i++){
+                        if(oData[i].APPLICATION_TYPE == 'PLG'){
+                          pluginApp.push(oData[i])
+                        }
+                    }
+                    var oModel = new JSONModel(pluginApp);
+                    this.getView().setModel(oModel,"pluginAppModel");
+                    this._getManageSiteiFrame(pluginApp);
+                    
+                }.bind(this), function (oError) {
+                    MessageBox.error("Error: ",oError);
+                }); 
       },
       _getManageSiteiFrame: function(plugindata){
           // this.destroy();
           var pluginLink= plugindata[0].TO_SA_APPLICATION[0].SA_APPLICATION_LINK;
-          var oCarousel = this.byId("appPage");
+          var oPage = this.byId("appPage");
+          oPage.destroyContent();
           var container = new sap.ui.core.HTML({
-              preferDOM: true,
-             content: "<iframe src='"+pluginLink+"' '></iframe>"
+              // preferDOM: true,
+             content: "<iframe height='100%' width='100%' src='"+pluginLink+"' ></iframe>"
                         });
-          oCarousel.addPage(container)
+          oPage.addContent(container)
       }
 
         

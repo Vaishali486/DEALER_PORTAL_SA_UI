@@ -1,0 +1,10 @@
+<mvc:View controllerName="com.ibs.ibsidealtoolpage.controller.appContent"
+    displayBlock="true"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m">
+   <Page id="appDisplayPage">
+        <content>
+            <!-- <Text text="application"></Text> -->
+        </content>
+   </Page>
+</mvc:View>

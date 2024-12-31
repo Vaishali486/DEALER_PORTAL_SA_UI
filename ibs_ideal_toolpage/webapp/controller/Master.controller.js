@@ -50,17 +50,14 @@ sap.ui.define([
 			oToolPage.setSideExpanded(!oToolPage.getSideExpanded());
 		},
         onPressWelcome: function() {
-            // const oRouter = this.getOwnerComponent().getRouter(); 
+            const oRouter = this.getOwnerComponent().getRouter(); 
             oRouter.navTo("RouteWelcome"); 		
         },
         onHelpPress:function () {
-            // const oRouter = this.getOwnerComponent().getRouter(); 
+            const oRouter = this.getOwnerComponent().getRouter(); 
             oRouter.navTo("RouteHelp");     
         },
-        onItemSelect : function(){
-            const oRouter = this.getOwnerComponent().getRouter();
-            oRouter.navTo("RouteMainContent");
-        },
+        
         onClickAvatar: async function(oEvent){
              
             var oEventSource = oEvent.getSource();
@@ -74,8 +71,7 @@ sap.ui.define([
             this.aboutFragment = await this.loadFragment({
                 name: "com.ibs.ibsidealtoolpage.view.Fragment.UserDetail"
             });
-            // this.getView().addDependent(aboutFragment);
-            // aboutFragment.open(oEventSource);
+            
             this.aboutFragment.open();
         },
         OnCloseAbout : function(){
@@ -87,11 +83,38 @@ sap.ui.define([
             sap.m.URLHelper.redirect("/logout", false);
 
         },
+        onItemSelect : function(oEvent){
+            const oRouter = this.getOwnerComponent().getRouter();
+            oRouter.navTo("RouteMainContent");
+        },
+        onAppItemSelect : function(oEvent){
+      
+
+            var oModelData = {
+                appURLPATH : null
+            };
+            var appModel = oEvent.getParameters().item.getBindingContext('accessAppModel').getObject();
+            if(appModel.SA_APPLICATION_LINK){
+                oModelData.appURLPATH = appModel.SA_APPLICATION_LINK;
+            }
+            else if(!appModel.TO_SA_APPLICATION){
+                oModelData.appURLPATH = appModel.APPLICATION_ICON_URL;    
+            }
+            if(oModelData){
+                var oModel = new JSONModel(oModelData);
+                this.getOwnerComponent().setModel(oModel,"sideAppModel"); 
+                
+            }
+            const oRouter = this.getOwnerComponent().getRouter();
+            oRouter.navTo("RouteAppContent");
+
+        },
+        
         _getUserAttributes: function () {
              
             var appId = this.getOwnerComponent().getManifestEntry("/sap.app/id");
             var appPath = appId.replaceAll(".", "/");
-            // appModulePath = jQuery.sap.getModulePath(appPath);
+           
             var appModulePath = sap.ui.require.toUrl(appPath);
             
             var attr = appModulePath + "/user-api/attributes";
@@ -120,53 +143,33 @@ sap.ui.define([
         },
         _getAccessApps:function(){
              
-            var ContextBinding = oAppDataModel.bindContext("/getAccessApps(...)"); // BooksByGenre is the function 							      Import to get custom data
-            // ContextBinding.setParameter("genre", 'MYS') //  genre is the paramater we are passing to 					 backend which is set in backend which works like filter
+            var ContextBinding = oAppDataModel.bindContext("/getAccessApps(...)"); 
             ContextBinding.execute().then(
                 function () {
                     var oData = ContextBinding.getBoundContext().getObject().value;
+                    var aAppType = ['GRP','APP','LNK']
                     var groupApplication =[];
                     for(let i=0 ; i< oData.length; i++){
-                        if(oData[i].APPLICATION_TYPE == 'GRP'){
+                        if(aAppType.includes(oData[i].APPLICATION_TYPE)){
                             groupApplication.push(oData[i])
+                        }
+                        if(oData[i].APPLICATION_TYPE == 'APP'){
+                            oData[i].APPLICATION_ICON_URL = oData[i].TO_SA_APPLICATION[0].SA_APPLICATION_LINK;
+                            oData[i].TO_SA_APPLICATION = null;
                         }
                     }
                     var oModel = new JSONModel(groupApplication);
-
-                    this.getView().setModel(oModel,"accessAppModel");
+                    this.getOwnerComponent().setModel(oModel,"accessAppModel");
                     
                 }.bind(this), function (oError) {
                     MessageBox.error("Error: ",oError);
                 }); 
 
         },
-        // onSignOut:function(){
+       
             
-        // },
-        // onManageSite:function(){
-        //     var oList =  this.getOwnerComponent().getModel().bindList("/applicationMaster",undefined,[],
-        //         [new Filter("APPLICATION_TYPE", FilterOperator.EQ, "PLG")],
-        //         {   $expand: "TO_SA_APPLICATION" 
-        //         });
-        //         oList.requestContexts().then((odata) => {
-        //             var pluginApp = [];
-        //             odata.forEach(element => {
-        //             pluginApp.push(element.getObject());
-        //         });
-        //         var oModel = new JSONModel(pluginApp);
-        //         this.getView().setModel(oModel,"pluginAppModel");
-        //         this._getManageSiteiFrame(pluginApp);
-
-        //     });
-        // },
-        // _getManageSiteiFrame: function(plugindata){
-        //     // this.destroy();
-        //     var pluginLink= plugindata[0].TO_SA_APPLICATION[0].SA_APPLICATION_LINK;
-        //     var container = new sap.ui.core.HTML({
-        //         preferDOM: true,
-        //        content: "<iframe src='"+pluginLink+"' '></iframe>"
-        //                   });
-        // }
+        
+        
 
     });
 });

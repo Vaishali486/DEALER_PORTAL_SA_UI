@@ -4,7 +4,6 @@
     xmlns="sap.m">
    <Page id="appPage">
         <content>
-            <Text text="application"></Text>
         </content>
    </Page>
 </mvc:View>

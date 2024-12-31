@@ -50,7 +50,7 @@
             <tnt:SideNavigation
                 expanded="true"
                 selectedKey="{/selectedKey}"
-                itemSelect="onItemSelect"
+                itemSelect="onAppItemSelect"
             >
                 <tnt:NavigationList items="{path: 'accessAppModel>/'}">
                     <tnt:NavigationListItem
