@@ -2,8 +2,9 @@
     displayBlock="true"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m">
-   <Page id="appDisplayPage">
-        <content>
+   <Page id="appDisplayPage" title="{sideAppModel>/applicationName}" >
+        <content >
+          
             <!-- <Text text="application"></Text> -->
         </content>
    </Page>

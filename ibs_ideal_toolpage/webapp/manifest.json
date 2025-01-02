@@ -98,6 +98,7 @@
         "routerClass": "sap.m.routing.Router",
         "controlAggregation": "pages",
         "controlId": "pageContainer",
+        "clearTarget": true,
         "transition": "slide",
         "type": "View",
         "viewType": "XML",
@@ -145,7 +146,8 @@
       "targets": {
         "TargetMaster": {
           "id": "Master",
-          "name": "Master"
+          "name": "Master",
+          "clearControlAggregation": false
         },
         "TargetWelcome": {
             "id": "Welcome",
@@ -168,7 +170,7 @@
     "rootView": {
       "viewName": "com.ibs.ibsidealtoolpage.view.Master",
       "type": "XML",
-      "id": "App"
+      "id": "Master"
     }
   }
 }

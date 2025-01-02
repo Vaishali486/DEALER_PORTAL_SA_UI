@@ -21,13 +21,17 @@ sap.ui.define([
         var applicationLink = oAppDataModel.appURLPATH;
     
         var oPage = this.byId("appDisplayPage");
+        if(oPage.getContent().length)
         oPage.destroyContent();
         var container = new sap.ui.core.HTML({
             // preferDOM: true,
            content: "<iframe height='100%' width='100%' src='"+applicationLink+"' ></iframe>"
                       });
         oPage.addContent(container)
-        }
+        const oRouter = this.getOwnerComponent().getRouter();
+        oRouter.navTo("RouteMaster");
+        },
+
 
         
     });

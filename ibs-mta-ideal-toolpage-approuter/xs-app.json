@@ -1,5 +1,9 @@
 {
   "authenticationMethod": "none",
   "routes": [],
-  "welcomeFile":"/comibsibsidealtoolpage"
+  "welcomeFile":"/comibsibsidealtoolpage",
+  "logout": {
+    "logoutEndpoint": "/logout",
+    "logoutPage": "/comibsibsidealtoolpage/index.html"
+  }
 }

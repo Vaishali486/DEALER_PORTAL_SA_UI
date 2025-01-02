@@ -79,9 +79,7 @@ sap.ui.define([
             this.aboutFragment.destroy();
         },
         onSignOut: function () {
-             
             sap.m.URLHelper.redirect("/logout", false);
-
         },
         onItemSelect : function(oEvent){
             const oRouter = this.getOwnerComponent().getRouter();
@@ -91,14 +89,17 @@ sap.ui.define([
       
 
             var oModelData = {
-                appURLPATH : null
+                appURLPATH : null,
+                applicationName: null
             };
             var appModel = oEvent.getParameters().item.getBindingContext('accessAppModel').getObject();
             if(appModel.SA_APPLICATION_LINK){
                 oModelData.appURLPATH = appModel.SA_APPLICATION_LINK;
+                oModelData.applicationName = appModel.SA_APPLICATION_NAME;
             }
             else if(!appModel.TO_SA_APPLICATION){
-                oModelData.appURLPATH = appModel.APPLICATION_ICON_URL;    
+                oModelData.appURLPATH = appModel.APPLICATION_ICON_URL;  
+                oModelData.applicationName = appModel.APPLICATION_NAME; 
             }
             if(oModelData){
                 var oModel = new JSONModel(oModelData);
@@ -166,10 +167,6 @@ sap.ui.define([
                 }); 
 
         },
-       
-            
-        
-        
-
+  
     });
 });
