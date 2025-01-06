@@ -161,7 +161,19 @@
               "controlConfiguration": {
                 "@com.sap.vocabularies.UI.v1.LineItem": {
                   "tableSettings": {
-                    "type": "ResponsiveTable"
+                    "type": "ResponsiveTable",
+                    "personalization": {}
+                  },
+                  "columns": {
+                    "DataField::SR_NO": {
+                      "width": "150px"
+                    },
+                    "DataField::APPLICATION_ICON": {
+                      "width": "200px"
+                    },
+                    "DataField::APPLICATION_NAME": {
+                      "width": "250px"
+                    }
                   }
                 },
                 "/resourceApplicationMaster/@com.sap.vocabularies.UI.v1.LineItem#tableView": {

@@ -60,8 +60,6 @@ sap.ui.define([
 
 				oCarousel.addPage(new Image("img" + imagemodel, {
 					src: "{resourcemodel>/"+i+"/LOGO}"
-					// densityAware: true,
-					// decorative: true
 				}));
 			}
 		},

@@ -67,6 +67,11 @@
                         />
                     </tnt:NavigationListItem>
                 </tnt:NavigationList>
+                <tnt:fixedItem>
+					<tnt:NavigationList >
+						<tnt:NavigationListItem select="onPressWelcome" text="Promotions" icon="sap-icon://explorer"  />
+					</tnt:NavigationList>
+				</tnt:fixedItem>
             </tnt:SideNavigation>
         </tnt:sideContent>
         <tnt:mainContents>

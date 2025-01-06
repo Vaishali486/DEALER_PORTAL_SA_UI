@@ -110,6 +110,14 @@
 <AnnotationPath>@UI.LineItem</AnnotationPath>
 </Collection>
 </PropertyValue>
+    <PropertyValue Property="SortOrder">
+        <Collection>
+            <Record Type="Common.SortOrderType">
+                <PropertyValue Property="Property" PropertyPath="SR_NO"/>
+                <PropertyValue Property="Descending" Bool="false"/>
+            </Record>
+        </Collection>
+    </PropertyValue>
 </Record>
 </PropertyValue>
 <PropertyValue Property="SelectionVariant">
@@ -206,6 +214,14 @@
 <AnnotationPath>@UI.LineItem#tableView</AnnotationPath>
 </Collection>
 </PropertyValue>
+    <PropertyValue Property="SortOrder">
+        <Collection>
+            <Record Type="Common.SortOrderType">
+                <PropertyValue Property="Property" PropertyPath="SEQUENCE"/>
+                <PropertyValue Property="Descending" Bool="false"/>
+            </Record>
+        </Collection>
+    </PropertyValue>
 </Record>
 </PropertyValue>
 <PropertyValue Property="SelectionVariant">
@@ -237,7 +253,7 @@
 </Record>
 <Record Type="UI.DataField">
 <PropertyValue Property="Value" Path="RESOURCE_TYPE"/>
-<PropertyValue Property="Label" String="Application Type"/>
+<PropertyValue Property="Label" String="Artifact Type"/>
 </Record>
 <Record Type="UI.DataField">
 <PropertyValue Property="Value" Path="FILE_CONTENT"/>
@@ -263,7 +279,8 @@
 </PropertyValue>
 <PropertyValue Property="TypeName" String=""/>
 <PropertyValue Property="TypeNamePlural" String=""/>
-<PropertyValue Property="ImageUrl" String=""/>
+
+    <PropertyValue Property="ImageUrl" Path="FILE_CONTENT"/>
 </Record>
 </Annotation>
 </Annotations>

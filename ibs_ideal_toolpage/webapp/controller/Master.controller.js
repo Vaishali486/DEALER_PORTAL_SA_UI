@@ -143,12 +143,11 @@ sap.ui.define([
             });
         },
         _getAccessApps:function(){
-             
             var ContextBinding = oAppDataModel.bindContext("/getAccessApps(...)"); 
             ContextBinding.execute().then(
                 function () {
                     var oData = ContextBinding.getBoundContext().getObject().value;
-                    var aAppType = ['GRP','APP','LNK']
+                    var aAppType = ['GRP','APP','LNK','PUP']
                     var groupApplication =[];
                     for(let i=0 ; i< oData.length; i++){
                         if(aAppType.includes(oData[i].APPLICATION_TYPE)){
@@ -158,14 +157,13 @@ sap.ui.define([
                             oData[i].APPLICATION_ICON_URL = oData[i].TO_SA_APPLICATION[0].SA_APPLICATION_LINK;
                             oData[i].TO_SA_APPLICATION = null;
                         }
-                    }
+                      }
                     var oModel = new JSONModel(groupApplication);
                     this.getOwnerComponent().setModel(oModel,"accessAppModel");
                     
                 }.bind(this), function (oError) {
                     MessageBox.error("Error: ",oError);
-                }); 
-
+            }); 
         },
   
     });
