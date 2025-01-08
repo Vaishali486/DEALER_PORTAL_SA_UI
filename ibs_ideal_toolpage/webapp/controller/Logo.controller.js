@@ -8,7 +8,7 @@ sap.ui.define([
   ], (BaseController,JSONModel,Filter,FilterOperator,Image,Sorter) => {
     "use strict";
     var that, appModulePath;
-    return BaseController.extend("com.ibs.ibsidealtoolpage.controller.Welcome", {
+    return BaseController.extend("com.ibs.ibsidealtoolpage.controller.Logo", {
         onInit() {
             that=this;
             // const oRouter = this.getOwnerComponent().getRouter();
@@ -18,12 +18,12 @@ sap.ui.define([
             var appPath = appId.replaceAll(".", "/");
             // appModulePath = jQuery.sap.getModulePath(appPath);
             appModulePath = sap.ui.require.toUrl(appPath);
-            this.onWelcomePage();
+            this.onLogoPage();
         },
         // onObjectMatched:function(){
            
         // },
-        onWelcomePage: function(){
+        onLogoPage: function(){
          
             var oList =  this.getOwnerComponent().getModel().bindList("/resourceApplicationMaster",undefined,
                 [new Sorter("SEQUENCE")],

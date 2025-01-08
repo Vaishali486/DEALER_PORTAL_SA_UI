@@ -34,6 +34,7 @@ server:
             path: /odata
             url: https://38a2b79dtrial-dev-dealer-portal-srv.cfapps.us10-001.hana.ondemand.com
             destination: ideal_portal
+            authenticationType: OAuth2JWTBearer
     - name: sap-fe-mockserver
       beforeMiddleware: csp
       configuration:

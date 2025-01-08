@@ -1,0 +1,10 @@
+<mvc:View xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="com.ibs.ibsidealtoolpage.controller.Logo" displayBlock="true">
+<!--  <App >  -->
+<Page id="LogoPage">
+<content>
+<Title id="LogoPag" class="sapUiSmallMarginTop"/>
+<Text text="logo page"></Text>
+</content>
+</Page>
+<!--  </App>  -->
+</mvc:View>

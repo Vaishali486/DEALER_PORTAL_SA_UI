@@ -22,7 +22,7 @@
                 </Button>
                 <Image
                     src="{resourcemodel>/0/LOGO}"
-                    press="onPressWelcome"
+                    press="onPressLogo"
                 />
                 <Title text="{resourcemodel>/0/RESOURCE_NAME}" />
                 <tnt:ToolHeaderUtilitySeparator />

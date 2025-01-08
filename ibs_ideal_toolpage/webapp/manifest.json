@@ -141,7 +141,15 @@
             "target": [
                 "TargetAppContent"
             ]
+        },
+        {
+            "name": "RouteLogo",
+            "pattern": "RouteLogoPage",
+            "target": [
+                "RouteTargetLogo"
+            ]
         }
+        
       ],
       "targets": {
         "TargetMaster": {
@@ -164,6 +172,10 @@
         "TargetAppContent": {
             "id": "appContent",
             "name": "appContent"
+        },
+        "RouteTargetLogo": {
+            "id": "Logo",
+            "name": "Logo"
         }
       }
     },

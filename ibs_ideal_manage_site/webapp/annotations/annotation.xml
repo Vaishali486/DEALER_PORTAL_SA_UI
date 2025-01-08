@@ -48,6 +48,18 @@
 <PropertyValue Property="Label" String="Application Icon URL"/>
 <PropertyValue Property="Value" Path="APPLICATION_ICON_URL"/>
 </Record>
+    <Record Type="UI.DataField">
+        <PropertyValue Property="Value" Path="POPUP_TEXT"/>
+        <PropertyValue Property="Label" String="POPUP_TEXT"/>
+    </Record>
+    <Record Type="UI.DataField">
+        <PropertyValue Property="Value" Path="FILE_CONTENT"/>
+        <PropertyValue Property="Label" String="FILE_CONTENT"/>
+    </Record>
+    <Record Type="UI.DataField">
+        <PropertyValue Property="Value" Path="FILE_NAME"/>
+        <PropertyValue Property="Label" String="FILE_NAME"/>
+    </Record>
 </Collection>
 </PropertyValue>
 </Record>
