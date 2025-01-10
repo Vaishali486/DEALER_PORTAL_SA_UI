@@ -1,10 +1,28 @@
 <mvc:View xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="com.ibs.ibsidealtoolpage.controller.Logo" displayBlock="true">
-<!--  <App >  -->
-<Page id="LogoPage">
-<content>
-<Title id="LogoPag" class="sapUiSmallMarginTop"/>
-<Text text="logo page"></Text>
+
+<Page showHeader="false" >
+<content >
+<!-- <Title id="LogoPag" class="sapUiSmallMarginTop"/> -->
+	<VBox id="vBoxiFrame" fitContainer="true" height="100%" width="100%" class="sapUiSmallMarginBottom">
+    <Carousel ariaLabelledBy="carouselTitle" class="sapUiContentPadding" loop="true" >
+		<Image src="{resourcemodel>/FirstImage}" alt="Example picture of speakers" />
+		<Image src="{resourcemodel>/SecondImage}" alt="Example picture of USB flash drive" />
+		<Image src="{resourcemodel>/ThirdImage}" alt="Example picture of spotlight" />
+		<Image src="{resourcemodel>/FourthImage}" alt="Example picture of screw" />
+	</Carousel>
+
+	<HBox class="sapUiMediumMarginTop" height="100%" width="100%"  >
+	<VBox id="vBoxActivityiFrame" height="100%" width="100%" >
+	</VBox>
+	<VBox >
+		<Image src="{resourcemodel>/CoolerImage}"  />
+	</VBox>
+	</HBox>
+
+	</VBox>
+
+
 </content>
 </Page>
-<!--  </App>  -->
+
 </mvc:View>

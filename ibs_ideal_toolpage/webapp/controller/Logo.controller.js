@@ -24,44 +24,40 @@ sap.ui.define([
            
         // },
         onLogoPage: function(){
-         
-            var oList =  this.getOwnerComponent().getModel().bindList("/resourceApplicationMaster",undefined,
-                [new Sorter("SEQUENCE")],
-                [new Filter("RESOURCE_TYPE", FilterOperator.EQ, "WLC")],{});
-                oList.requestContexts().then((odata) => {
-                  
-                    var resources = [];
-                    // for(let i=0; i<odata.length; i++){
-                    //     odata[i].getObject().LOGO = appModulePath + odata[i].getObject().LOGO;
-                    //     resources.push(odata[i].getObject());
-                    // }
-                    const count = odata.length;
-                    let i= 0;
-                    odata.forEach(element => {
-                        if(count>i){
-                        resources.push(element.getObject());
-                        resources[i].LOGO = appModulePath + resources[i].LOGO;
-                        i++;
-                    }
-                    });
-                var oModel = new JSONModel(resources);
-                this.getView().setModel(oModel,"resourcemodel");
-                this._setImagesInCarousel(resources)
-            });
-        },
-        _setImagesInCarousel: function (imagedata) {
-		
-			var oCarousel = this.byId("carouselSample");
-			oCarousel.destroyPages();
+            var imageData ={
+                FirstImage : null,
+                SecondImage: null,
+                ThirdImage: null,
+                FourthImage: null,
+                CoolerImage : null,
 
-			for (var i = 0; i < imagedata.length; i++) {
-				var imagemodel = i + 1;
+            }
+            imageData.FirstImage = sap.ui.require.toUrl("com/ibs/ibsidealtoolpage/Content/LogoFirst.png");
+            imageData.SecondImage = sap.ui.require.toUrl("com/ibs/ibsidealtoolpage/Content/LogoSecond.jpg");
+            imageData.ThirdImage = sap.ui.require.toUrl("com/ibs/ibsidealtoolpage/Content/LogoThird.jpg");
+            imageData.FourthImage = sap.ui.require.toUrl("com/ibs/ibsidealtoolpage/Content/LogoFourth.jpg");
+            imageData.CoolerImage = sap.ui.require.toUrl("com/ibs/ibsidealtoolpage/Content/Cooler.png");
 
-				oCarousel.addPage(new Image("img" + imagemodel, {
-					src: "{resourcemodel>/"+i+"/LOGO}"
-				}));
-			}
-		},
+            var pluginLink= sap.ui.require.toUrl("com/ibs/ibsidealtoolpage/Content/Catalog.html");;
+            var oPage = this.byId("vBoxiFrame");
+            // oPage.destroyContent();
+            var container = new sap.ui.core.HTML({
+               content: "<iframe height='100%' width='100%' src='"+pluginLink+"' ></iframe>"
+                          });
+            oPage.insertItem(container,1);
+
+            var pluginActivity= sap.ui.require.toUrl("com/ibs/ibsidealtoolpage/Content/Activities.html");;
+            var oPage = this.byId("vBoxActivityiFrame");
+            // oPage.destroyContent();
+            var container = new sap.ui.core.HTML({
+               content: "<iframe height='100%' width='100%' src='"+pluginActivity+"' ></iframe>"
+                          });
+            oPage.addItem(container)
+            
+            var oModel = new JSONModel(imageData);
+            this.getView().setModel(oModel,"resourcemodel");
+                // this._setImagesInCarousel(resources)
+        }
 
     });
   });

@@ -116,7 +116,7 @@
         },
         {
             "name": "RouteWelcome",
-            "pattern": "",
+            "pattern": "Welcome",
             "target": [
                 "TargetWelcome"
             ]
@@ -144,7 +144,7 @@
         },
         {
             "name": "RouteLogo",
-            "pattern": "RouteLogoPage",
+            "pattern": "",
             "target": [
                 "RouteTargetLogo"
             ]
