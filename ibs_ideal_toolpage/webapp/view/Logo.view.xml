@@ -11,9 +11,10 @@
 		<Image src="{resourcemodel>/FourthImage}" alt="Example picture of screw" />
 	</Carousel>
 
-	<HBox class="sapUiMediumMarginTop" height="100%" width="100%"  >
-	<VBox id="vBoxActivityiFrame" height="100%" width="100%" >
+	<HBox class="sapUiMediumMarginTop" height="100%" width="100%">
+	<VBox id="vBoxActivityiFrame" height="100%" width="100%" class="activityFrame">
 	</VBox>
+	
 	<VBox >
 		<Image src="{resourcemodel>/CoolerImage}"  />
 	</VBox>

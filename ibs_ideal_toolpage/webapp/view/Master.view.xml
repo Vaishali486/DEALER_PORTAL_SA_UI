@@ -52,7 +52,7 @@
                 selectedKey="{/selectedKey}"
                 itemSelect="onAppItemSelect"
             >
-                <tnt:NavigationList items="{path: 'accessAppModel>/'}">
+                <tnt:NavigationList id="idNavigationList" items="{path: 'accessAppModel>/'}">
                     <tnt:NavigationListItem
                         text="{accessAppModel>APPLICATION_NAME}"
                         icon="{accessAppModel>APPLICATION_ICON}"

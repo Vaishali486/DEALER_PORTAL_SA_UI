@@ -17,15 +17,34 @@ sap.ui.define([
             that= this;
             oRouter = this.getOwnerComponent().getRouter(); 
             oAppDataModel = this.getOwnerComponent().getModel();
+            that.idNavigationList=this.getView().byId("idNavigationList");
             this._onReadResource();
             this._getAccessApps();
             appId = this.getOwnerComponent().getManifestEntry("/sap.app/id");
             appPath = appId.replaceAll(".", "/");
             // appModulePath = jQuery.sap.getModulePath(appPath);
             appModulePath = sap.ui.require.toUrl(appPath);
-            // this._getUserAttributes();
+            this._navigationListItem();
+            this._getUserAttributes();
 
         },
+
+        _navigationListItem:function(oEvent){      
+
+            that.idNavigationList.onAfterRendering = function () {
+              sap.tnt.NavigationList.prototype.onAfterRendering.apply(this, arguments);
+              that.idNavigationList.getItems().forEach(function (oItem) {
+                  if (oItem.getItems && oItem.getItems().length > 0) {
+                      var iRowCount = 0;
+                      oItem.getItems().forEach(function (oSubItem) {  
+                        oSubItem.$().css("background-color", "Goldenrod");  
+                      });
+                  }
+              });
+            };   
+          },
+
+
         _onReadResource: function(){
              
             var oList =  this.getOwnerComponent().getModel().bindList("/resourceApplicationMaster",undefined,[],

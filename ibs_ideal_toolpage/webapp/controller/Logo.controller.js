@@ -49,11 +49,11 @@ sap.ui.define([
             var pluginActivity= sap.ui.require.toUrl("com/ibs/ibsidealtoolpage/Content/Activities.html");;
             var oPage = this.byId("vBoxActivityiFrame");
             // oPage.destroyContent();
-            var container = new sap.ui.core.HTML({
+            var activityContainer = new sap.ui.core.HTML({
                content: "<iframe height='100%' width='100%' src='"+pluginActivity+"' ></iframe>"
                           });
-            oPage.addItem(container)
-            
+            oPage.insertItem(activityContainer,1)
+        
             var oModel = new JSONModel(imageData);
             this.getView().setModel(oModel,"resourcemodel");
                 // this._setImagesInCarousel(resources)
