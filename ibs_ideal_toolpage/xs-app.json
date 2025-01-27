@@ -1,10 +1,6 @@
 {
   "welcomeFile": "/index.html",
   "authenticationMethod": "route",
-  "logout": {
-    "logoutEndpoint": "/logout",
-    "logoutPage": "/comibsibsidealtoolpage/index.html"
-  },
   "routes": [
     {
       "source": "^/odata/(.*)$",

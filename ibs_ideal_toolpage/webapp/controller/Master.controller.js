@@ -154,7 +154,7 @@ sap.ui.define([
             // var appType = oEvent.getParameters().item.getBindingContext('accessAppModel').oModel.oData.APPLICATION_TYPE;
             var appModel = oEvent.getParameters().item.getBindingContext('accessAppModel').getObject();
             if(appModel.APPLICATION_TYPE == 'PUP'){
-                if(appModel.FILE_MIMETYPE == 'image/png'){
+                if(appModel.FILE_MIMETYPE == 'image/png' || appModel.FILE_MIMETYPE == 'image/jpg'){
                     var popupUrl = appModulePath + appModel.CONTENT;
                     oPopupData.imagePopupUrl = popupUrl;
                     BusyIndicator.show();

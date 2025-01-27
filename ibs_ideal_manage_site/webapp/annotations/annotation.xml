@@ -25,6 +25,20 @@
 </PropertyValue>
 </Record>
 </Annotation>
+    <Annotation Term="Common.SideEffects" Qualifier="SideEffectIsPopup">
+        <Record>
+            <PropertyValue Property="SourceProperties">
+                <Collection> 
+                    <PropertyPath>APPLICATION_TYPE</PropertyPath>
+                </Collection>
+            </PropertyValue>
+            <PropertyValue Property="TargetProperties">
+                <Collection>
+                    <Path>IS_POPUP_CHECK</Path>
+                </Collection>
+            </PropertyValue>
+        </Record>
+    </Annotation>
 <Annotation Term="UI.FieldGroup" Qualifier="GeneratedGroup">
 <Record Type="UI.FieldGroupType">
 <PropertyValue Property="Data">
@@ -50,15 +64,33 @@
 </Record>
     <Record Type="UI.DataField">
         <PropertyValue Property="Value" Path="POPUP_TEXT"/>
-        <PropertyValue Property="Label" String="POPUP_TEXT"/>
+        <PropertyValue Property="Label" String="Popup Text"/>
+        <!-- <Annotation Term="UI.Hidden" Path="IS_POPUP"/> -->
+        <!-- <Annotation Term="UI.Hidden" >   -->
+                <!-- <Bool>IS_POPUP</Bool>                   -->
+                    <!-- <Path>IS_POPUP</Path>  -->
+                                                                        
+        <!-- </Annotation> -->
     </Record>
     <Record Type="UI.DataField">
         <PropertyValue Property="Value" Path="FILE_CONTENT"/>
-        <PropertyValue Property="Label" String="FILE_CONTENT"/>
+        <PropertyValue Property="Label" String="File"/>
+        <!-- <Annotation Term="UI.Hidden"  Path="IS_POPUP"/> -->
+        <!-- <Annotation Term="UI.Hidden" Path="IS_POPUP">                 -->
+                            <!-- <If>                  
+                            <Eq>                    
+                            <Path>IS_POPUP_CHECK</Path>                    
+                            <String>X</String>          
+                            </Eq>                  
+                            <Bool>false</Bool>                        
+                            <Bool>true</Bool>                    
+                            </If>                 -->
+        <!-- </Annotation> -->
     </Record>
     <Record Type="UI.DataField">
         <PropertyValue Property="Value" Path="FILE_NAME"/>
-        <PropertyValue Property="Label" String="FILE_NAME"/>
+        <PropertyValue Property="Label" String="File Name"/>                               
+        <!-- <Annotation Term="UI.Hidden" Path="IS_POPUP"/> -->
     </Record>
 </Collection>
 </PropertyValue>
@@ -291,7 +323,6 @@
 </PropertyValue>
 <PropertyValue Property="TypeName" String=""/>
 <PropertyValue Property="TypeNamePlural" String=""/>
-
     <PropertyValue Property="ImageUrl" Path="FILE_CONTENT"/>
 </Record>
 </Annotation>
@@ -408,6 +439,10 @@
     </Record>
     </Annotation>
 </Annotations>  -->
+    <!-- <Annotations Target="ideal_sa_application.applicationMaster/POPUP_TEXT">
+        <Annotation Term="Common.Text" Path="IS_POPUP_CHECK"/>
+    </Annotations> -->
+   
 </Schema>
 </edmx:DataServices>
 </edmx:Edmx>

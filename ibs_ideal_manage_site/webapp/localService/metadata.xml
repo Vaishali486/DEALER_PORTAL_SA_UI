@@ -72,6 +72,8 @@
                 <Property Name="APPLICATION_TYPE" Type="Edm.String" MaxLength="10"/>
                 <Property Name="APPLICATION_NAME" Type="Edm.String" MaxLength="200"/>
                 <Property Name="USER_ROLE" Type="Edm.String" MaxLength="100"/>
+                <Property Name="IS_POPUP" Type="Edm.Boolean" DefaultValue="true"/>
+                <Property Name="IS_POPUP_CHECK" Type="Edm.String" MaxLength="1"/>
                 <Property Name="POPUP_TEXT" Type="Edm.String" MaxLength="200"/>
                 <Property Name="CONTENT" Type="Edm.String" MaxLength="200"/>
                 <Property Name="FILE_CONTENT" Type="Edm.Stream"/>
@@ -177,6 +179,9 @@
                 <Parameter Name="PreserveChanges" Type="Edm.Boolean"/>
                 <ReturnType Type="ideal_sa_application.applicationMaster"/>
             </Action>
+            <Action Name="IsPopupFunction" IsBound="true">
+                <Parameter Name="in" Type="ideal_sa_application.applicationMaster"/>
+            </Action>
             <Function Name="getAccessApps" IsBound="false" IsComposable="false">
                 <ReturnType Type="Collection(Edm.String)" Nullable="true"/>
             </Function>
@@ -184,20 +189,20 @@
                 <Annotation Term="UI.LineItem" Qualifier="tableView">
                     <Collection>
                         <Record Type="UI.DataField">
-                            <PropertyValue Property="Value" Path="SEQUENCE"/>
-                            <PropertyValue Property="Label" String="SEQUENCE"/>
+                            <PropertyValue Property="Value" Path="FILE_CONTENT"/>
+                            <PropertyValue Property="Label" String="FILE_CONTENT"/>
                         </Record>
                         <Record Type="UI.DataField">
-                            <PropertyValue Property="Value" Path="RESOURCE_TYPE"/>
-                            <PropertyValue Property="Label" String="RESOURCE_TYPE"/>
+                            <PropertyValue Property="Value" Path="FILE_NAME"/>
+                            <PropertyValue Property="Label" String="FILE_NAME"/>
                         </Record>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="RESOURCE_NAME"/>
                             <PropertyValue Property="Label" String="RESOURCE_NAME"/>
                         </Record>
                         <Record Type="UI.DataField">
-                            <PropertyValue Property="Value" Path="FILE_CONTENT"/>
-                            <PropertyValue Property="Label" String="FILE_CONTENT"/>
+                            <PropertyValue Property="Value" Path="RESOURCE_TYPE"/>
+                            <PropertyValue Property="Label" String="RESOURCE_TYPE"/>
                         </Record>
                     </Collection>
                 </Annotation>
@@ -287,6 +292,51 @@
                 <Annotation Term="UI.Hidden" Bool="true"/>
             </Annotations>
             <Annotations Target="ideal_sa_application.applicationMaster">
+                <Annotation Term="Common.SideEffects" Qualifier="ChangeApplicationIcon">
+                    <Record Type="Common.SideEffectsType">
+                        <PropertyValue Property="SourceProperties">
+                            <Collection>
+                                <PropertyPath>APPLICATION_ICON_URL</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="TargetProperties">
+                            <Collection>
+                                <Path>APPLICATION_ICON</Path>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Common.SideEffects">
+                    <Record Type="Common.SideEffectsType">
+                        <PropertyValue Property="SourceProperties">
+                            <Collection>
+                                <PropertyPath>APPLICATION_TYPE</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="TargetProperties">
+                            <Collection>
+                                <Path>IS_POPUP_CHECK</Path>
+                                <Path>POPUP_TEXT</Path>
+                                <Path>FILE_NAME</Path>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Common.SideEffects" Qualifier="SideEffectPopup">
+                    <Record Type="Common.SideEffectsType">
+                        <PropertyValue Property="SourceProperties">
+                            <Collection>
+                                <PropertyPath>APPLICATION_TYPE</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="TargetProperties">
+                            <Collection>
+                                <String>IS_POPUP</String>
+                                <String>IS_POPUP_CHECK</String>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
                 <Annotation Term="UI.FieldGroup" Qualifier="GeneratedGroup">
                     <Record Type="UI.FieldGroupType">
                         <PropertyValue Property="Data">
@@ -316,12 +366,29 @@
                                     <PropertyValue Property="Value" Path="USER_ROLE"/>
                                 </Record>
                                 <Record Type="UI.DataField">
-                                    <PropertyValue Property="Value" Path="FILE_CONTENT"/>
-                                    <PropertyValue Property="Label" String="FILE_CONTENT"/>
+                                    <PropertyValue Property="Label" String="IS_POPUP"/>
+                                    <PropertyValue Property="Value" Path="IS_POPUP"/>
+                                    <Annotation Term="UI.Hidden" Bool="true"/>
                                 </Record>
                                 <Record Type="UI.DataField">
-                                    <PropertyValue Property="Value" Path="FILE_NAME"/>
+                                    <PropertyValue Property="Label" String="IS_POPUP_CHECK"/>
+                                    <PropertyValue Property="Value" Path="IS_POPUP_CHECK"/>
+                                    <Annotation Term="UI.Hidden" Bool="true"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="POPUP_TEXT"/>
+                                    <PropertyValue Property="Value" Path="POPUP_TEXT"/>
+                                    <Annotation Term="UI.Hidden" Path="IS_POPUP"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="FILE_CONTENT"/>
+                                    <PropertyValue Property="Value" Path="FILE_CONTENT"/>
+                                    <Annotation Term="UI.Hidden" Path="IS_POPUP"/>
+                                </Record>
+                                <Record Type="UI.DataField">
                                     <PropertyValue Property="Label" String="FILE_NAME"/>
+                                    <PropertyValue Property="Value" Path="FILE_NAME"/>
+                                    <Annotation Term="UI.Hidden" Bool="true"/>
                                 </Record>
                             </Collection>
                         </PropertyValue>
@@ -333,11 +400,6 @@
                             <PropertyValue Property="ID" String="GeneratedFacet1"/>
                             <PropertyValue Property="Label" String="General Information"/>
                             <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#GeneratedGroup"/>
-                        </Record>
-                        <Record Type="UI.ReferenceFacet">
-                            <PropertyValue Property="Label" String="SA Application"/>
-                            <PropertyValue Property="ID" String="SAApplication"/>
-                            <PropertyValue Property="Target" AnnotationPath="TO_SA_APPLICATION/@UI.LineItem#SAApplication"/>
                         </Record>
                     </Collection>
                 </Annotation>
@@ -365,6 +427,16 @@
                         </Record>
                     </Collection>
                 </Annotation>
+                <Annotation Term="UI.HeaderFacets">
+                    <Collection/>
+                </Annotation>
+                <Annotation Term="UI.FieldGroup" Qualifier="ResourceView">
+                    <Record Type="UI.FieldGroupType">
+                        <PropertyValue Property="Data">
+                            <Collection/>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
                 <Annotation Term="UI.SelectionPresentationVariant" Qualifier="tableView">
                     <Record Type="UI.SelectionPresentationVariantType">
                         <PropertyValue Property="PresentationVariant">
@@ -386,15 +458,16 @@
                         <PropertyValue Property="Text" String="Table View"/>
                     </Record>
                 </Annotation>
-            </Annotations>
-            <Annotations Target="ideal_sa_application.EntityContainer/applicationMaster">
-                <Annotation Term="UI.SelectionPresentationVariant" Qualifier="tableView">
+                <Annotation Term="UI.LineItem" Qualifier="tableView">
+                    <Collection/>
+                </Annotation>
+                <Annotation Term="UI.SelectionPresentationVariant" Qualifier="tableView1">
                     <Record Type="UI.SelectionPresentationVariantType">
                         <PropertyValue Property="PresentationVariant">
                             <Record Type="UI.PresentationVariantType">
                                 <PropertyValue Property="Visualizations">
                                     <Collection>
-                                        <AnnotationPath>@UI.LineItem</AnnotationPath>
+                                        <AnnotationPath>@UI.LineItem#tableView</AnnotationPath>
                                     </Collection>
                                 </PropertyValue>
                             </Record>
@@ -406,7 +479,54 @@
                                 </PropertyValue>
                             </Record>
                         </PropertyValue>
-                        <PropertyValue Property="Text" String="Table View"/>
+                        <PropertyValue Property="Text" String="Table View 1"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="ideal_sa_application.EntityContainer/applicationMaster">
+                <Annotation Term="Common.SideEffects" Qualifier="ChangeApplicationIcon">
+                    <Record Type="Common.SideEffectsType">
+                        <PropertyValue Property="SourceProperties">
+                            <Collection>
+                                <PropertyPath>APPLICATION_ICON_URL</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="TargetProperties">
+                            <Collection>
+                                <Path>APPLICATION_ICON</Path>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Common.SideEffects">
+                    <Record Type="Common.SideEffectsType">
+                        <PropertyValue Property="SourceProperties">
+                            <Collection>
+                                <PropertyPath>APPLICATION_TYPE</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="TargetProperties">
+                            <Collection>
+                                <Path>IS_POPUP_CHECK</Path>
+                                <Path>POPUP_TEXT</Path>
+                                <Path>FILE_NAME</Path>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Common.SideEffects" Qualifier="SideEffectPopup">
+                    <Record Type="Common.SideEffectsType">
+                        <PropertyValue Property="SourceProperties">
+                            <Collection>
+                                <PropertyPath>APPLICATION_TYPE</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="TargetProperties">
+                            <Collection>
+                                <String>IS_POPUP</String>
+                                <String>IS_POPUP_CHECK</String>
+                            </Collection>
+                        </PropertyValue>
                     </Record>
                 </Annotation>
                 <Annotation Term="Common.DraftRoot">
@@ -414,6 +534,48 @@
                         <PropertyValue Property="ActivationAction" String="ideal_sa_application.draftActivate"/>
                         <PropertyValue Property="EditAction" String="ideal_sa_application.draftEdit"/>
                         <PropertyValue Property="PreparationAction" String="ideal_sa_application.draftPrepare"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.SelectionPresentationVariant" Qualifier="tableView">
+                    <Record Type="UI.SelectionPresentationVariantType">
+                        <PropertyValue Property="PresentationVariant">
+                            <Record Type="UI.PresentationVariantType">
+                                <PropertyValue Property="Visualizations">
+                                    <Collection>
+                                        <AnnotationPath>@UI.LineItem</AnnotationPath>
+                                    </Collection>
+                                </PropertyValue>
+                            </Record>
+                        </PropertyValue>
+                        <PropertyValue Property="SelectionVariant">
+                            <Record Type="UI.SelectionVariantType">
+                                <PropertyValue Property="SelectOptions">
+                                    <Collection/>
+                                </PropertyValue>
+                            </Record>
+                        </PropertyValue>
+                        <PropertyValue Property="Text" String="Table View"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.SelectionPresentationVariant" Qualifier="tableView1">
+                    <Record Type="UI.SelectionPresentationVariantType">
+                        <PropertyValue Property="PresentationVariant">
+                            <Record Type="UI.PresentationVariantType">
+                                <PropertyValue Property="Visualizations">
+                                    <Collection>
+                                        <AnnotationPath>@UI.LineItem#tableView</AnnotationPath>
+                                    </Collection>
+                                </PropertyValue>
+                            </Record>
+                        </PropertyValue>
+                        <PropertyValue Property="SelectionVariant">
+                            <Record Type="UI.SelectionVariantType">
+                                <PropertyValue Property="SelectOptions">
+                                    <Collection/>
+                                </PropertyValue>
+                            </Record>
+                        </PropertyValue>
+                        <PropertyValue Property="Text" String="Table View 1"/>
                     </Record>
                 </Annotation>
             </Annotations>
@@ -452,36 +614,6 @@
             </Annotations>
             <Annotations Target="ideal_sa_application.applicationMaster/DraftAdministrativeData">
                 <Annotation Term="UI.Hidden" Bool="true"/>
-            </Annotations>
-            <Annotations Target="ideal_sa_application.saApplicationMaster">
-                <Annotation Term="UI.LineItem" Qualifier="SAApplication">
-                    <Collection>
-                        <Record Type="UI.DataField">
-                            <PropertyValue Property="Value" Path="SA_APPLICATION_ICON_URL"/>
-                            <PropertyValue Property="Label" String="SA_APPLICATION_ICON_URL"/>
-                        </Record>
-                        <Record Type="UI.DataField">
-                            <PropertyValue Property="Value" Path="SA_APPLICATION_LINK"/>
-                            <PropertyValue Property="Label" String="SA_APPLICATION_LINK"/>
-                        </Record>
-                        <Record Type="UI.DataField">
-                            <PropertyValue Property="Value" Path="SA_APPLICATION_NAME"/>
-                            <PropertyValue Property="Label" String="SA_APPLICATION_NAME"/>
-                        </Record>
-                        <Record Type="UI.DataField">
-                            <PropertyValue Property="Value" Path="FILE_CONTENT"/>
-                            <PropertyValue Property="Label" String="FILE_CONTENT"/>
-                        </Record>
-                        <Record Type="UI.DataField">
-                            <PropertyValue Property="Value" Path="FILE_MIMETYPE"/>
-                            <PropertyValue Property="Label" String="FILE_MIMETYPE"/>
-                        </Record>
-                        <Record Type="UI.DataField">
-                            <PropertyValue Property="Value" Path="FILE_NAME"/>
-                            <PropertyValue Property="Label" String="FILE_NAME"/>
-                        </Record>
-                    </Collection>
-                </Annotation>
             </Annotations>
             <Annotations Target="ideal_sa_application.EntityContainer/saApplicationMaster">
                 <Annotation Term="Common.DraftNode">
