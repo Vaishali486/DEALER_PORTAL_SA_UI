@@ -35,7 +35,6 @@ modules:
       - comibsibsidealmanagesite.zip
       name: comibsibsidealmanagesite
       target-path: resources/
-    
 - name: comibsibsidealtoolpage
   type: html5
   path: ibs_ideal_toolpage
@@ -94,3 +93,4 @@ resources:
     service-plan: lite
 parameters:
   deploy_mode: html5-repo
+  enable-parallel-deployments: true

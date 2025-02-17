@@ -2,7 +2,7 @@
 <Popover placement="Bottom" showHeader="false">
 <StandardListItem title="{userModel>/fullname}"></StandardListItem>
 <StandardListItem type="Active" title="About" icon="sap-icon://kpi-managing-my-area" press="onAbout"/>
-<StandardListItem type="Active" title="Manage Site"  icon="sap-icon://user-settings" press="onItemSelect"/>
+<StandardListItem type="Active" id="idManageSite" title="Manage Site"  icon="sap-icon://user-settings" press="onItemSelect"/>
 <StandardListItem type="Active" title="Sign Out" icon="sap-icon://log" press="onSignOut"/>
 </Popover>
 </core:FragmentDefinition>

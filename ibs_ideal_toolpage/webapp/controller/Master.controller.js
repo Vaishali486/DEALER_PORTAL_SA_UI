@@ -203,7 +203,7 @@ sap.ui.define([
         },
         
         _getUserAttributes: function () {
-             
+            
             var appId = this.getOwnerComponent().getManifestEntry("/sap.app/id");
             var appPath = appId.replaceAll(".", "/");
            
@@ -248,6 +248,7 @@ sap.ui.define([
                             oData[i].APPLICATION_ICON_URL = oData[i].TO_SA_APPLICATION[0].SA_APPLICATION_LINK;
                             oData[i].TO_SA_APPLICATION = null;
                         }
+                        
                         // else if(oData[i].APPLICATION_TYPE == 'PUP'){
                         //     oData[i].APPLICATION_ICON_URL = appModulePath + "/odata/v4/ideal-sa-application/applicationMaster("+oData[i].ID +",IsActiveEntity=true)/FILE_CONTENT";
                         //     oData[i].TO_SA_APPLICATION = null;
@@ -255,6 +256,8 @@ sap.ui.define([
                       }
                     var oModel = new JSONModel(groupApplication);
                     this.getOwnerComponent().setModel(oModel,"accessAppModel");
+
+                    
                     
                 }.bind(this), function (oError) {
                     MessageBox.error("Error: ",oError);
